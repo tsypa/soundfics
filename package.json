@@ -1,14 +1,14 @@
 {
-  "name": "soundics",
+  "name": "soundfics",
   "version": "1.0.0",
-  "description": "ICS proxy which play sounds for chess moves from the intercepted data",
+  "description": "FICS proxy which play sounds for chess moves from the intercepted data",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tsypa/soundics.git"
+    "url": "git+https://github.com/tsypa/soundfics.git"
   },
   "keywords": [
     "ICS",
@@ -19,9 +19,9 @@
   "author": "Maxim Tsyplakov",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tsypa/soundics/issues"
+    "url": "https://github.com/tsypa/soundfics/issues"
   },
-  "homepage": "https://github.com/tsypa/soundics#readme",
+  "homepage": "https://github.com/tsypa/soundfics#readme",
   "dependencies": {
     "lodash": "^4.5.0",
     "node-aplay": "^1.0.3"

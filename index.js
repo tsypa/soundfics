@@ -26,16 +26,13 @@ function getLogin(data) {
   return matches && matches.length > 1 ? matches[1] : false;
 }
 
-function getAction(buffer) {
-  let s = buffer.toString('ascii');
-
+function getAction(s) {
   // check that we logged in
-  if (!fics.login) {
-    let login = getLogin(s);
-    if (login) {
-      return {id: 'login', login: login};
-    }
-  }
+
+  let login = getLogin(s);
+  if (login) {
+    return {id: 'login', login: login};
+  };
 
   // check that is new game
   let matches = /{Game.+\((\w+)\svs.\s(\w+)\)\sCreating.+}/.exec(s);
@@ -45,15 +42,14 @@ function getAction(buffer) {
 
   // check that game is over
   matches = /{Game.+\((\w+)\svs.\s(\w+)\).+}\s(.+)-(\d)/.exec(s);
-  if (matches && matches.length === 5) {
-    let white = matches[3];
-    let black = matches[4];
+  if (matches && matches.length > 4) {
     return {
       id: 'end',
       players: {white: matches[1], black: matches[2]},
-      result: {white: matches[3], black: matches[4]}
+      result: {white: matches[3], black: matches[3] === '*' ? '*' : matches[4]}
     };
   }
+
   // check that is style12
   matches = /(<12>)\s((\S+\s){8})([B|W])\s(-*\d)\s(\d)\s(\d)\s(\d)\s(\d)\s(\d)\s(\d+)\s(\w+)\s(\w+)\s(-*\d)\s(\d)\s(\d)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s([BKNPQRa-ho1-8\-\/]*)\s(\(.+\))\s([BKNPQRa-h1-8Ox+\-]*)/.exec(s);
 
@@ -76,15 +72,15 @@ function getAction(buffer) {
   return false;
 };
 
-let getRandomSound = (sounds, key) => sounds[key][_.random(1, sounds[key].length - 1)];
+function getRandomSound(sounds, key) {
+  let files = sounds[key];
+  return files[_.random(files.length - 1)];
+};
 
 function action(data, sounds) {
-  let action = getAction(data);
   let playData = [];
-
-  if (action) {
-    console.log('action', JSON.stringify(action), 'data', data.toString('ascii'));
-  }
+  let s = data.toString('ascii');
+  let action = getAction(s);
 
   if (action.id === 'login') {
     fics.login = action.login;
@@ -114,16 +110,13 @@ function action(data, sounds) {
       // draw
       playData.push(getRandomSound(sounds, 'end'));
     } else {
-      console.log('login', fics.login);
       let myColor = action.players.white === fics.login ? 'white' : 'black';
       console.log('my color is', myColor);
       if ((myColor === 'white' && parseInt(action.result.white))
           || (myColor === 'black' && parseInt(action.result.black))) {
-        console.log('I win');
         playData.push(getRandomSound(sounds, 'applause'));
         playData.push(`winapplause${_.random(1, 5)}.wav`);
       } else {
-        console.log('I lose');
         playData.push(getRandomSound(sounds, 'end'));
       }
     }
@@ -131,9 +124,13 @@ function action(data, sounds) {
   }
 
   playData.forEach(sound => {
-    console.log('playing', sound);
     new Sound(sound).play();
   });
+}
+
+function logout(fics) {
+  fics.game = {white: false, black: false};
+  fics.login = false;
 }
 
 let prefix = `${__dirname}/sounds`;
@@ -155,6 +152,8 @@ let sounds = {
 Object.keys(sounds).forEach(key => {
   sounds[key] =  _.map(fs.readdirSync(`${prefix}/${key}`), f  =>  `${prefix}/${key}/${f}`);
 });
+
+// console.log(sounds);
 
 let proxy = net.createServer(proxySocket => {
   let buffers = [];
@@ -181,27 +180,27 @@ let proxy = net.createServer(proxySocket => {
   });
 
   proxySocket.on('error', error => {
-    console.log(error);
+    // console.log(error);
     ficsSocket.end();
-    fics.game = {white: false, black: false};
+    logout(fics);
   });
 
   ficsSocket.on('error', error => {
-    console.log(error);
+    // console.log(error);
     proxySocket.end();
-    fics.game = {white: false, black: false};
+    logout(fics);
   });
 
   proxySocket.on('close', error => {
-    console.log('proxy connection closed', error);
+    // console.log('proxy connection closed', error);
     ficsSocket.end();
-    fics.game = {white: false, black: false};
+    logout(fics);
   });
 
   ficsSocket.on('close', error => {
-    console.log('FICS connection closed', error);
+    // console.log('FICS connection closed', error);
     proxySocket.end();
-    fics.game = {white: false, black: false};
+    logout(fics);
   });
 });
 

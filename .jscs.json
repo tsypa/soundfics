@@ -1,0 +1,10 @@
+{
+  "preset" : "node-style-guide",
+  "esnext" : true,
+  "maxErrors" : 2048,
+  "requireTrailingComma": null,
+  "requireCapitalizedComments": null,
+  "maximumLineLength": null,
+  "requireCurlyBraces": null,
+  "requireCamelCaseOrUpperCaseIdentifiers" : false
+}
