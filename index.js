@@ -111,7 +111,6 @@ function action(data, sounds) {
       playData.push(getRandomSound(sounds, 'end'));
     } else {
       let myColor = action.players.white === fics.login ? 'white' : 'black';
-      console.log('my color is', myColor);
       if ((myColor === 'white' && parseInt(action.result.white))
           || (myColor === 'black' && parseInt(action.result.black))) {
         playData.push(getRandomSound(sounds, 'applause'));
@@ -133,27 +132,12 @@ function logout(fics) {
   fics.login = false;
 }
 
-let prefix = `${__dirname}/sounds`;
-let sounds = {
-  applause: [],
-  backlight: [],
-  capture: [],
-  castle: [],
-  challenge: [],
-  check: [],
-  cheer: [],
-  draw: [],
-  end: [],
-  login: [],
-  move: [],
-  pain: [],
-  start: [] };
+let soundBase = `${__dirname}/sounds`;
+let sounds = {};
 
-Object.keys(sounds).forEach(key => {
-  sounds[key] =  _.map(fs.readdirSync(`${prefix}/${key}`), f  =>  `${prefix}/${key}/${f}`);
+fs.readdirSync(`${soundBase}`).forEach(key => {
+  sounds[key] =  _.map(fs.readdirSync(`${soundBase}/${key}`), f  =>  `${soundBase}/${key}/${f}`);
 });
-
-// console.log(sounds);
 
 let proxy = net.createServer(proxySocket => {
   let buffers = [];
