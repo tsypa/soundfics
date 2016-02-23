@@ -25,7 +25,7 @@ let config = {
   proxy: {
     port: process.env.npm_package_config_proxy || '5000'
   },
-  backLight: process.env.npm_package_config_proxy || true
+  backLight: process.env.npm_package_config_backlight || true
 };
 
 function getLogin(data) {
