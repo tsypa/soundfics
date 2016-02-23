@@ -1,0 +1,12 @@
+[Service]
+ExecStart=soundfics
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=soundfics
+User=soundfics
+Group=soundfics
+Environment=NODE_ENV="production --harmony"
+
+[Install]
+WantedBy=multi-user.target

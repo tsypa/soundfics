@@ -17,8 +17,15 @@ let fics = {
   }
 };
 
-let options = {
-  backLight: true
+let config = {
+  fics: {
+    host: process.env.npm_package_config_proxy || 'freechess.org',
+    port: process.env.npm_package_config_ficsport || '5000'
+  },
+  proxy: {
+    port: process.env.npm_package_config_proxy || '5000'
+  },
+  backLight: process.env.npm_package_config_proxy || true
 };
 
 function getLogin(data) {
@@ -94,12 +101,12 @@ function action(data, sounds) {
       playData.push(getRandomSound(sounds, 'castle'));
     } else if (action.notation.pretty.indexOf('+') !== -1) {
       playData.push(getRandomSound(sounds, 'check'));
-      if (options.backLight) {
+      if (config.backLight) {
         playData.push(getRandomSound(sounds, 'pain'));
       }
     } else if (action.notation.pretty.indexOf('x') !== -1) {
       playData.push(getRandomSound(sounds, 'capture'));
-      if (options.backLight) {
+      if (config.backLight) {
         playData.push(getRandomSound(sounds, 'backlight'));
       }
     } else {
@@ -143,7 +150,7 @@ let proxy = net.createServer(proxySocket => {
   let buffers = [];
   let ficsSocket = new net.Socket();
 
-  ficsSocket.connect(parseInt(ficsPort), 'freechess.org', () => {
+  ficsSocket.connect(config.fics.port, config.fics.host, () => {
     buffers.forEach(buffer => {
       ficsSocket.write(buffer);
     });
@@ -188,4 +195,4 @@ let proxy = net.createServer(proxySocket => {
   });
 });
 
-proxy.listen(5000, '127.0.0.1');
+proxy.listen(config.fics.port, '127.0.0.1');

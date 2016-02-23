@@ -1,9 +1,20 @@
 {
   "name": "soundfics",
+  "main": "soundfics",
+  "bin" : {
+    "soundfics": "./soundfics"
+  },
+  "preferGlobal": "true",
+  "config" : {
+    "ficshost" : "freechess.org",
+    "ficsport" : "5000",
+    "proxyport" : "5000",
+    "backlight": "true"
+  },
   "version": "1.0.0",
   "description": "FICS proxy which play sounds for chess moves from the intercepted data",
-  "main": "index.js",
   "scripts": {
+    "start" : "node --harmony index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,10 +22,11 @@
     "url": "git+https://github.com/tsypa/soundfics.git"
   },
   "keywords": [
-    "ICS",
+    "fics",
     "sound",
     "fritz",
-    "proxy"
+    "proxy",
+    "xboard"
   ],
   "author": "Maxim Tsyplakov",
   "license": "MIT",
