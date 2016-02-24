@@ -1,20 +1,20 @@
 {
   "name": "soundfics",
   "main": "soundfics",
-  "bin" : {
+  "bin": {
     "soundfics": "./soundfics"
   },
   "preferGlobal": "true",
-  "config" : {
-    "ficshost" : "freechess.org",
-    "ficsport" : "5000",
-    "proxyport" : "5000",
+  "config": {
+    "ficshost": "freechess.org",
+    "ficsport": "5000",
+    "proxyport": "5000",
     "backlight": "true"
   },
   "version": "1.0.0",
   "description": "FICS proxy which play sounds for chess moves from the intercepted data",
   "scripts": {
-    "start" : "node --harmony index.js",
+    "start": "node --harmony index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/tsypa/soundfics#readme",
   "dependencies": {
-    "lodash": "^4.5.0",
-    "node-aplay": "^1.0.3"
+    "daemon": "^1.1.0",
+    "lodash": "^4.5.0"
   }
 }

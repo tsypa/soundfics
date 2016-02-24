@@ -1,2 +1,52 @@
 #!/bin/sh
-npm start
+
+usage() {
+    echo "usage $(basename $0) <start|stop>"
+}
+
+pid() {
+    ps -x | sed -nr '/[n]ode.+soundfics/p;' | sed -r  's/\s.+//g'
+}
+
+if [ ${#} -ne 1 ] ; then
+    usage
+    exit 1
+fi
+
+ACTION=${1}
+PID=$(pid);
+
+case ${ACTION} in
+    "start")
+        if [ ! -z ${PID} ] ; then
+            echo "soundfics already running"
+            exit 1
+        fi
+        # if symlink then go to workdir
+        if [ -L ${0} ] ; then
+            cd $(dirname $(readlink -en ${0}))
+        fi
+        npm start
+        ;;
+    "stop")
+        if [ -z ${PID} ]; then
+            echo 'soundfics not running'
+        else
+            kill ${PID}
+        fi
+        ;;
+    "status")
+        if [ -z ${PID} ]; then
+            echo 'not running'
+        else
+            echo "running"
+        fi
+        ;;
+    "restart")
+        ${0} stop
+        ${0} start
+        ;;
+    *)
+        usage
+        ;;
+esac

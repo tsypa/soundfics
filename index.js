@@ -1,9 +1,11 @@
 'use strict';
 
+require('daemon')();
+
 let fs = require('fs');
 let net = require('net');
 let _ = require('lodash');
-let Sound = require('node-aplay');
+// let Sound = require('node-aplay');
 
 let ficsPort = '5000';
 let ixMove = 1;
@@ -89,6 +91,10 @@ function action(data, sounds) {
   let s = data.toString('ascii');
   let action = getAction(s);
 
+  // if (action) {
+  //   console.log(action);
+  // }
+
   if (action.id === 'login') {
     fics.login = action.login;
     playData.push(getRandomSound(sounds, 'login'));
@@ -129,8 +135,8 @@ function action(data, sounds) {
     fics.game = {white: false, black: false};
   }
 
-  playData.forEach(sound => {
-    new Sound(sound).play();
+  playData.forEach(file => {
+    play(file);
   });
 }
 
@@ -145,6 +151,13 @@ let sounds = {};
 fs.readdirSync(`${soundBase}`).forEach(key => {
   sounds[key] =  _.map(fs.readdirSync(`${soundBase}/${key}`), f  =>  `${soundBase}/${key}/${f}`);
 });
+
+let spawn = require('child_process').spawn;
+let exec = require('child_process').exec;
+
+function play(file) {
+  spawn('aplay', [file]);
+}
 
 let proxy = net.createServer(proxySocket => {
   let buffers = [];
