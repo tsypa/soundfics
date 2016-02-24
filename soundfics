@@ -19,27 +19,27 @@ PID=$(pid);
 case ${ACTION} in
     "start")
         if [ ! -z ${PID} ] ; then
-            echo "soundfics already running"
+            echo "RUNNING"
             exit 1
         fi
         # if symlink then go to workdir
         if [ -L ${0} ] ; then
             cd $(dirname $(readlink -en ${0}))
         fi
-        npm start
+        npm start > /dev/null
         ;;
     "stop")
         if [ -z ${PID} ]; then
-            echo 'soundfics not running'
+            echo 'NOT RUNNING'
         else
             kill ${PID}
         fi
         ;;
     "status")
         if [ -z ${PID} ]; then
-            echo 'not running'
+            echo 'NOT RUNNING'
         else
-            echo "running"
+            echo "RUNNING"
         fi
         ;;
     "restart")
