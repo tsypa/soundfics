@@ -41,10 +41,12 @@ if (config.daemonize) {
 }
 
 let logger = new  winston.Logger({
-  level: 'debug',
+  level: config.logLevel,
   colorize: true,
   transports: transports
 });
+
+logger.debug(config);
 
 function getLogin(data) {
   let matches = /\*{4}\sStarting\sFICS session as (.+) \*{4}/.exec(data);
