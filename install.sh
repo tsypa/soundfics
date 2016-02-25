@@ -1,15 +1,10 @@
 #!/bin/sh
 
-# npm c set soundfics_ficshost freechess.org
-# npm c set soundfics_ficsport 5000
-# npm c set soundfics_proxyport 5000
-# npm c set soundfics_backlight true
-# npm c set soundfics_loglevel error
-# npm c set soundfics_daemonize false
-
-npm c set soundfics:ficshost freechess.org
-npm c set soundfics:ficsport 5000
-npm c set soundfics:proxyport 5000
-npm c set soundfics:backlight true
-npm c set soundfics:loglevel error
-npm c set soundfics:daemonize false
+if [ "$(id -u)" = "0" ]; then
+    npm -g c set soundfics:ficshost freechess.org
+    npm -g c set soundfics:ficsport 5000
+    npm -g c set soundfics:proxyport 5000
+    npm -g c set soundfics:backlight true
+    npm -g c set soundfics:loglevel error
+    npm -g c set soundfics:daemonize false
+fi
