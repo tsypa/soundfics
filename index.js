@@ -1,15 +1,28 @@
 'use strict';
 
-require('daemon')();
-
 let fs = require('fs');
 let net = require('net');
 let _ = require('lodash');
-// let Sound = require('node-aplay');
+let winston = require('winston');
 
-let ficsPort = '5000';
-let ixMove = 1;
-let ixCapture = 1;
+let config = {
+  fics: {
+    host: process.env.npm_config_soundfics_ficshost,
+    port: process.env.npm_config_soundfics_ficsport
+  },
+  proxy: {
+    port: process.env.npm_config_soundfics_proxyport
+  },
+  backLight: process.env.npm_config_soundfics_backlight,
+  logLevel: process.env.npm_config_soundfics_loglevel,
+  daemonize: process.env.npm_config_soundfics_daemonize
+};
+
+console.log(config);
+
+if (config.daemonize) {
+  require('daemon')();
+}
 
 let fics = {
   login: false,
@@ -19,16 +32,19 @@ let fics = {
   }
 };
 
-let config = {
-  fics: {
-    host: process.env.npm_package_config_proxy || 'freechess.org',
-    port: process.env.npm_package_config_ficsport || '5000'
-  },
-  proxy: {
-    port: process.env.npm_package_config_proxy || '5000'
-  },
-  backLight: process.env.npm_package_config_backlight || true
-};
+let transports = [];
+
+if (config.daemonize) {
+  transports.push(new (winston.transports.File)({filename: 'soundfics.log'}));
+} else {
+  transports.push(new (winston.transports.Console)());
+}
+
+let logger = new  winston.Logger({
+  level: 'debug',
+  colorize: true,
+  transports: transports
+});
 
 function getLogin(data) {
   let matches = /\*{4}\sStarting\sFICS session as (.+) \*{4}/.exec(data);
@@ -60,7 +76,7 @@ function getAction(s) {
   }
 
   // check that is style12
-  matches = /(<12>)\s((\S+\s){8})([B|W])\s(-*\d)\s(\d)\s(\d)\s(\d)\s(\d)\s(\d)\s(\d+)\s(\w+)\s(\w+)\s(-*\d)\s(\d)\s(\d)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s([BKNPQRa-ho1-8\-\/]*)\s(\(.+\))\s([BKNPQRa-h1-8Ox+\-]*)/.exec(s);
+  matches = /(<12>)\s((\S+\s){8})([B|W])\s(-*\d)\s(\d)\s(\d)\s(\d)\s(\d)\s(\d+)\s(\d+)\s(\w+)\s(\w+)\s(-*\d)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s([BKNPQRa-ho1-8\-\/]*)\s(\(.+\))\s([BKNPQRa-h1-8Ox+\-]*)/.exec(s);
 
   if (matches && matches.length > 24) {
     return {
@@ -91,9 +107,11 @@ function action(data, sounds) {
   let s = data.toString('ascii');
   let action = getAction(s);
 
-  // if (action) {
-  //   console.log(action);
-  // }
+  if (action) {
+    logger.debug(action);
+  } else {
+    logger.debug(s);
+  }
 
   if (action.id === 'login') {
     fics.login = action.login;
@@ -136,6 +154,7 @@ function action(data, sounds) {
   }
 
   playData.forEach(file => {
+    logger.debug('play', file);
     play(file);
   });
 }

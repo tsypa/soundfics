@@ -5,12 +5,6 @@
     "soundfics": "./soundfics"
   },
   "preferGlobal": "true",
-  "config": {
-    "ficshost": "freechess.org",
-    "ficsport": "5000",
-    "proxyport": "5000",
-    "backlight": "true"
-  },
   "version": "1.0.0",
   "description": "FICS proxy which play sounds for chess moves from the intercepted data",
   "scripts": {
@@ -36,6 +30,7 @@
   "homepage": "https://github.com/tsypa/soundfics#readme",
   "dependencies": {
     "daemon": "^1.1.0",
-    "lodash": "^4.5.0"
+    "lodash": "^4.5.0",
+    "winston": "^2.1.1"
   }
 }
