@@ -12,8 +12,9 @@ let config = {
     host: process.env.npm_config_soundfics_ficshost,
     port: process.env.npm_config_soundfics_ficsport
   },
-  proxy: {
-    port: process.env.npm_config_soundfics_proxyport
+  soundfics: {
+    listen: process.env.npm_config_soundfics_listen,
+    port: process.env.npm_config_soundfics_port
   },
   backLight: process.env.npm_config_soundfics_backlight,
   logLevel: process.env.npm_config_soundfics_loglevel,
@@ -234,4 +235,4 @@ let proxy = net.createServer(proxySocket => {
   });
 });
 
-proxy.listen(config.fics.port, '127.0.0.1');
+proxy.listen(config.soundfics.port, config.soundfics.listen);

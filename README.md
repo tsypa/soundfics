@@ -29,7 +29,8 @@ Soundfics has several confguration options
 |------|-----------|-------------|
 |ficshost|FICS hostname or address|freechess.org|
 |ficsport|FICS port number|5000|
-|proxyport|client port number|5000|
+|listen|listen address|127.0.0.1|
+|port|soundfics port number|5000|
 |daemonize|daemon mode|true|
 |loglevel|winston log level|error|
 |backlight|sound backlight|true|
