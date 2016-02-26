@@ -148,12 +148,12 @@ function action(data, sounds) {
     } else if (action.notation.pretty.indexOf('+') !== -1) {
       playData.push(getRandomSound(sounds, 'check'));
       if (config.backLight) {
-        playData.push(getRandomSound(sounds, 'pain'));
+        playData.push(getRandomSound(sounds, 'grunt'));
       }
     } else if (action.notation.pretty.indexOf('x') !== -1) {
       playData.push(getRandomSound(sounds, 'capture'));
       if (config.backLight) {
-        playData.push(getRandomSound(sounds, 'backlight'));
+        playData.push(getRandomSound(sounds, 'punch'));
       }
     } else {
       playData.push(getRandomSound(sounds, 'move'));
