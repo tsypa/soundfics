@@ -4,8 +4,13 @@ usage() {
     echo "usage $(basename $0) <status|start|stop|restart>"
 }
 
-pid() {
-    ps -x | sed -nr '/[n]ode.+soundfics/p;' | sed -r  's/\s.+//g'
+isRunning() {
+    if [ -f ${1} ] ; then
+        PID=$(<${1})
+        if ps -p ${PID} > /dev/null  ; then
+            echo ${PID}
+        fi
+    fi
 }
 
 if [ ${#} -ne 1 ] ; then
@@ -14,23 +19,25 @@ if [ ${#} -ne 1 ] ; then
 fi
 
 ACTION=${1}
-PID=$(pid);
+PIDFILE='soundfics.pid'
+PID=$(isRunning ${PIDFILE});
 
 case ${ACTION} in
     "start")
-        if [ ! -z ${PID} ] ; then
-            echo "RUNNING"
+        if [ ! -z  ${PID} ] ; then
+            echo "already running, stop first"
             exit 1
         fi
         # if symlink then go to workdir
         if [ -L ${0} ] ; then
             cd $(dirname $(readlink -en ${0}))
         fi
+        rm -f ${PIDFILE}
         npm start > /dev/null
         ;;
     "stop")
         if [ -z ${PID} ]; then
-            echo 'NOT RUNNING'
+            echo 'not running'
         else
             kill ${PID}
         fi

@@ -1,9 +1,10 @@
 'use strict';
 
 let fs = require('fs');
-let path = require('path');
-let net = require('net');
 let _ = require('lodash');
+let net = require('net');
+let path = require('path');
+let npid = require('npid');
 let winston = require('winston');
 
 let config = {
@@ -44,6 +45,14 @@ let logger = new  winston.Logger({
   colorize: true,
   transports: transports
 });
+
+try {
+  let pid = npid.create('soundfics.pid');
+  pid.removeOnExit();
+} catch (error) {
+  logger.error(error.message);
+  process.exit(1);
+}
 
 const soundBase = path.join(__dirname, 'sounds');
 let sounds = {};
