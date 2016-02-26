@@ -20,7 +20,7 @@ let config = {
   },
   soundfics: {
     listen: process.env.npm_config_soundfics_listen || '127.0.0.1',
-    port: process.env.npm_config_soundfics_port
+    port: process.env.npm_config_soundfics_port || '5000'
   },
   backLight: process.env.npm_config_soundfics_backlight || 'true',
   logLevel: process.env.npm_config_soundfics_loglevel || 'error'
