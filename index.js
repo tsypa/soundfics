@@ -1,6 +1,7 @@
 'use strict';
 
 let fs = require('fs');
+let path = require('path');
 let net = require('net');
 let _ = require('lodash');
 let winston = require('winston');
@@ -17,8 +18,6 @@ let config = {
   logLevel: process.env.npm_config_soundfics_loglevel,
   daemonize: process.env.npm_config_soundfics_daemonize
 };
-
-console.log(config);
 
 if (config.daemonize) {
   require('daemon')();
@@ -46,13 +45,12 @@ let logger = new  winston.Logger({
   transports: transports
 });
 
-logger.debug(config);
-
-const soundBase = `${__dirname}/sounds`;
+const soundBase = path.join(__dirname, 'sounds');
 let sounds = {};
 
-fs.readdirSync(`${soundBase}`).forEach(key => {
-  sounds[key] =  _.map(fs.readdirSync(`${soundBase}/${key}`), f  =>  `${soundBase}/${key}/${f}`);
+fs.readdirSync(soundBase).forEach(key => {
+  let keyDir = path.join(soundBase, key);
+  sounds[key] =  _.map(fs.readdirSync(keyDir), f  =>  `${keyDir}/${f}`);
 });
 
 let spawn = require('child_process').spawn;

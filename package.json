@@ -32,6 +32,7 @@
   "dependencies": {
     "daemon": "^1.1.0",
     "lodash": "^4.5.0",
+    "npid": "^0.4.0",
     "winston": "^2.1.1"
   }
 }
