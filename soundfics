@@ -5,12 +5,7 @@ usage() {
 }
 
 isRunning() {
-    if [ -f ${1} ] ; then
-        PID=$(<${1})
-        if ps -p ${PID} > /dev/null  ; then
-            echo ${PID}
-        fi
-    fi
+    ps -C node -o pid,command | awk '/soundfics.js/{print $1}'
 }
 
 if [ ${#} -ne 1 ] ; then
@@ -19,8 +14,7 @@ if [ ${#} -ne 1 ] ; then
 fi
 
 ACTION=${1}
-PIDFILE='soundfics.pid'
-PID=$(isRunning ${PIDFILE});
+PID=$(isRunning)
 
 case ${ACTION} in
     "start")
@@ -32,7 +26,6 @@ case ${ACTION} in
         if [ -L ${0} ] ; then
             cd $(dirname $(readlink -en ${0}))
         fi
-        rm -f ${PIDFILE}
         npm start > /dev/null
         ;;
     "stop")

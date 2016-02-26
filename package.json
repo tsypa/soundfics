@@ -9,7 +9,7 @@
   "description": "FICS proxy which play sounds for chess moves from the intercepted data",
   "scripts": {
     "postinstall": "./postinstall.sh",
-    "start": "node --harmony index.js",
+    "start": "node --harmony soundfics.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -32,7 +32,6 @@
   "dependencies": {
     "daemon": "^1.1.0",
     "lodash": "^4.5.0",
-    "npid": "^0.4.0",
     "winston": "^2.1.1"
   }
 }
