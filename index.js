@@ -48,6 +48,19 @@ let logger = new  winston.Logger({
 
 logger.debug(config);
 
+const soundBase = `${__dirname}/sounds`;
+let sounds = {};
+
+fs.readdirSync(`${soundBase}`).forEach(key => {
+  sounds[key] =  _.map(fs.readdirSync(`${soundBase}/${key}`), f  =>  `${soundBase}/${key}/${f}`);
+});
+
+let spawn = require('child_process').spawn;
+
+function play(file) {
+  spawn('aplay', [file]);
+}
+
 function getLogin(data) {
   let matches = /\*{4}\sStarting\sFICS session as (.+) \*{4}/.exec(data);
   return matches && matches.length > 1 ? matches[1] : false;
@@ -147,7 +160,6 @@ function action(data, sounds) {
       if ((myColor === 'white' && parseInt(action.result.white))
           || (myColor === 'black' && parseInt(action.result.black))) {
         playData.push(getRandomSound(sounds, 'applause'));
-        playData.push(`winapplause${_.random(1, 5)}.wav`);
       } else {
         playData.push(getRandomSound(sounds, 'end'));
       }
@@ -164,20 +176,6 @@ function action(data, sounds) {
 function logout(fics) {
   fics.game = {white: false, black: false};
   fics.login = false;
-}
-
-let soundBase = `${__dirname}/sounds`;
-let sounds = {};
-
-fs.readdirSync(`${soundBase}`).forEach(key => {
-  sounds[key] =  _.map(fs.readdirSync(`${soundBase}/${key}`), f  =>  `${soundBase}/${key}/${f}`);
-});
-
-let spawn = require('child_process').spawn;
-let exec = require('child_process').exec;
-
-function play(file) {
-  spawn('aplay', [file]);
 }
 
 let proxy = net.createServer(proxySocket => {
