@@ -10,7 +10,7 @@ Soundfics is designed to sound backlight&nbsp;if you don't like your FICS client
 
 # Installation
 ```
-npm -g i soundfics
+sudo npm -g i soundfics
 ```
 # Usage
 ## cli
