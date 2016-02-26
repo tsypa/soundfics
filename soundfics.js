@@ -8,11 +8,6 @@ let winston = require('winston');
 
 let daemonize = process.env.npm_config_soundfics_daemonize;
 
-if (daemonize === undefined) {
-  console.log('set true');
-  daemonize = 'true';
-}
-
 let config = {
   fics: {
     host: process.env.npm_config_soundfics_ficshost || 'freechess.org',
@@ -25,6 +20,10 @@ let config = {
   backLight: process.env.npm_config_soundfics_backlight || 'true',
   logLevel: process.env.npm_config_soundfics_loglevel || 'error'
 };
+
+if (daemonize === undefined) {
+  daemonize = 'true';
+}
 
 if (daemonize) {
   require('daemon')();
