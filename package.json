@@ -8,7 +8,6 @@
   "version": "1.0.0",
   "description": "FICS proxy which play sounds for chess moves from the intercepted data",
   "scripts": {
-    "postinstall": "./postinstall.sh",
     "start": "node --harmony soundfics.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

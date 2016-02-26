@@ -38,7 +38,7 @@ Soundfics has several confguration options
 You can change configuration options by npm.
 For example
 ```
-npm -g c soundfics:backlight false
+npm config set soundfics:backlight false
 ```
 Will tell the soundfics to sound something like Fritz<br>
 Backlight adds additional sounds to base Fritz sounds like

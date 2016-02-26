@@ -37,9 +37,9 @@ case ${ACTION} in
         ;;
     "status")
         if [ -z ${PID} ]; then
-            echo 'NOT RUNNING'
+            echo 'not running'
         else
-            echo "RUNNING"
+            echo "running"
         fi
         ;;
     "restart")

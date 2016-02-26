@@ -6,21 +6,27 @@ let net = require('net');
 let path = require('path');
 let winston = require('winston');
 
+let daemonize = process.env.npm_config_soundfics_daemonize;
+
+if (daemonize === undefined) {
+  console.log('set true');
+  daemonize = 'true';
+}
+
 let config = {
   fics: {
-    host: process.env.npm_config_soundfics_ficshost,
-    port: process.env.npm_config_soundfics_ficsport
+    host: process.env.npm_config_soundfics_ficshost || 'freechess.org',
+    port: process.env.npm_config_soundfics_ficsport || '5000'
   },
   soundfics: {
-    listen: process.env.npm_config_soundfics_listen,
+    listen: process.env.npm_config_soundfics_listen || '127.0.0.1',
     port: process.env.npm_config_soundfics_port
   },
-  backLight: process.env.npm_config_soundfics_backlight,
-  logLevel: process.env.npm_config_soundfics_loglevel,
-  daemonize: process.env.npm_config_soundfics_daemonize
+  backLight: process.env.npm_config_soundfics_backlight || 'true',
+  logLevel: process.env.npm_config_soundfics_loglevel || 'error'
 };
 
-if (config.daemonize) {
+if (daemonize) {
   require('daemon')();
 }
 
