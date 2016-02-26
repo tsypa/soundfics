@@ -1,7 +1,7 @@
 # soundfics
 A proxy which play sounds for chess moves and events highlighted from the FICS traffic
 ## Motivation
-Soundfics is designed to be sound replacement if you use FICS client without good acoustinc behaviour
+Soundfics is designed to sound backlight&nbsp;if you don't like your FICS client acoustic behaviour
 ## Requirements
 - Unix flavor OS (Linux or other)
 - nodejs
@@ -33,7 +33,7 @@ Soundfics has several confguration options
 |port|soundfics port number|5000|
 |daemonize|daemon mode|true|
 |loglevel|winston log level|error|
-|backlight|sound backlight|true|
+|backlight|baclight base sound or not|true|
 
 You can change configuration options by npm.
 For example
