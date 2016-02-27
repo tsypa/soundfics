@@ -17,7 +17,10 @@ sudo npm -g i soundfics
 ```
 soundfics (status|start|stop|restart)
 ```
-You can run soundfics with *** soundfics start ***
+You can run soundfics with 
+```
+soundfics start
+```
 then run your favorite FICS client with sounds disabled (for example xboard)
 ```
 xboard -ics -icshost 127.0.0.1 -icshelper timeseal -size medium
