@@ -60,6 +60,7 @@ Tells to soundfics to sound something like Fritz<br>
 
 ## Roadmap
 - add different sound schemes
+- add cheers sound
 
 ## License
 soundfics is released under the MIT license.
