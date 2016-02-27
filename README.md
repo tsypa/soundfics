@@ -50,8 +50,8 @@ For example
 ```
 npm config set soundfics:backlight false
 ```
-Will tell the soundfics to sound something like Fritz<br>
-Backlight adds additional sounds to base Fritz sounds like
+Tells to soundfics to sound something like Fritz<br>
+'backlight' option pumps up a base sound by additional sounds
 
 |Base|Addition|
 |----|------|
