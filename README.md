@@ -4,7 +4,7 @@ A proxy which play sounds for chess moves and events highlighted from the FICS t
 ## Motivation
 I like to play on FICS under Linux with xboard.<br>
 But I am not satisfied with native Xboard's acoustic behaviour.<br>
-So, soundfics designed to sounds a chess traffic from FICS to FICS client
+So, soundfics designed to sounds a chess traffic from FICS to FICS client <br>
 Tested clients is **Xboard**, **Jin**
 
 ## Requirements
