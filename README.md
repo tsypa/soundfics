@@ -1,7 +1,12 @@
 # soundfics
 A proxy which play sounds for chess moves and events highlighted from the FICS traffic
+
 ## Motivation
-Soundfics is designed to sound backlight&nbsp;if you don't like your FICS client acoustic behaviour
+I like to play on freechess under Linux with xboard.<br>
+But I am not satisfied with native Xboard acoustinc behaviour.<br>
+So, soundfics designed to sounds a chess traffic from FICS to client.<br>
+Perhaps not only Xboard (not tested).
+
 ## Requirements
 - Unix flavor OS (Linux or other)
 - nodejs
@@ -13,6 +18,7 @@ Soundfics is designed to sound backlight&nbsp;if you don't like your FICS client
 sudo npm -g i soundfics
 ```
 ## Usage
+
 ### cli
 ```
 soundfics (status|start|stop|restart)
@@ -25,6 +31,7 @@ then run your favorite FICS client (e.g. xboard) with disabled sounds
 ```
 xboard -ics -icshost 127.0.0.1 -icshelper timeseal -size medium
 ```
+
 ### Configuration
 Soundfics has several confguration options
 
