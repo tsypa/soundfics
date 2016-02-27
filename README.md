@@ -8,12 +8,12 @@ Soundfics is designed to sound backlight&nbsp;if you don't like your FICS client
 - npm
 - aplay
 
-# Installation
+## Installation
 ```
 sudo npm -g i soundfics
 ```
-# Usage
-## cli
+## Usage
+### cli
 ```
 soundfics (status|start|stop|restart)
 ```
@@ -22,7 +22,7 @@ then run your favorite FICS client with sounds disabled (for example xboard)
 ```
 xboard -ics -icshost 127.0.0.1 -icshelper timeseal -size medium
 ```
-## Configuration
+### Configuration
 Soundfics has several confguration options
 
 |Option|Description|Default value|
@@ -48,8 +48,8 @@ Backlight adds additional sounds to base Fritz sounds like
 |check|grunt|
 |capture|punch|
 
-# Roadmap
+## Roadmap
 - add different sound schemes
 
-# License
+## License
 soundfics is released under the MIT license.
