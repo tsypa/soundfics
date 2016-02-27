@@ -21,7 +21,7 @@ You can run soundfics with
 ```
 soundfics start
 ```
-then run your favorite FICS client with sounds disabled (for example xboard)
+then run your favorite FICS client (e.g. xboard) with disabled sounds
 ```
 xboard -ics -icshost 127.0.0.1 -icshelper timeseal -size medium
 ```
