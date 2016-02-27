@@ -5,7 +5,7 @@
     "soundfics": "./soundfics"
   },
   "preferGlobal": "true",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "FICS proxy which play sounds for chess moves from the intercepted data",
   "scripts": {
     "start": "node --harmony soundfics.js",
@@ -19,7 +19,8 @@
     "fics",
     "sound",
     "proxy",
-    "xboard"
+    "xboard",
+    "chess"
   ],
   "author": "Maxim Tsyplakov",
   "license": "MIT",
