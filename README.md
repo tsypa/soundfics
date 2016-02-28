@@ -12,6 +12,7 @@ Tested clients is **Xboard**, **Jin**, **eboard**
 - nodejs
 - npm
 - aplay
+- FICS account (optional)
 
 ## Installation
 ```
@@ -27,6 +28,7 @@ You can run soundfics with
 ```
 soundfics start
 ```
+put FICS login and password in ~/.icsrc.<br>
 then run your favorite FICS client (e.g. xboard) with disabled sounds
 ```
 xboard -ics -icshost 127.0.0.1 -icshelper timeseal -size medium
