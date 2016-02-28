@@ -1,5 +1,5 @@
 # soundfics
-A proxy which play sounds for chess moves and events highlighted from the FICS traffic
+FICS proxy which highlights the traffic by sound
 
 ## Motivation
 I like to play on FICS under Linux with xboard.<br>

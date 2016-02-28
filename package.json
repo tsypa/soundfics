@@ -5,8 +5,8 @@
     "soundfics": "./soundfics"
   },
   "preferGlobal": "true",
-  "version": "1.0.14",
-  "description": "FICS proxy which play sounds for chess moves from the intercepted data",
+  "version": "1.0.15",
+  "description": "FICS proxy which highlights the traffic by sound",
   "scripts": {
     "start": "node --harmony soundfics.js",
     "test": "echo \"Error: no test specified\" && exit 1"
