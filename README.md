@@ -5,7 +5,7 @@ FICS proxy which highlights the traffic by sound
 I like to play on FICS under Linux with xboard.<br>
 But I am not satisfied with native Xboard's acoustic behaviour.<br>
 So, soundfics designed to sounds a chess traffic from FICS to FICS client <br>
-Tested clients is **Xboard**, **Jin**, **eboard**
+Tested with **Xboard**, **Jin**, **eboard**
 
 ## Requirements
 - Unix flavor OS (Linux or other)
