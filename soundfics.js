@@ -159,14 +159,14 @@ function action(data, sounds) {
   } else if (action.id === 'end') {
     if (action.result.white === action.result.black) {
       // draw
-      playData.push(getRandomSound(sounds, 'end'));
+      playData.push(getRandomSound(sounds, 'draw'));
     } else {
       let myColor = action.players.white === fics.login ? 'white' : 'black';
       if ((myColor === 'white' && parseInt(action.result.white))
           || (myColor === 'black' && parseInt(action.result.black))) {
-        playData.push(getRandomSound(sounds, 'applause'));
+        playData.push(getRandomSound(sounds, 'win'));
       } else {
-        playData.push(getRandomSound(sounds, 'end'));
+        playData.push(getRandomSound(sounds, 'lose'));
       }
     }
     fics.game = {white: false, black: false};
