@@ -47,9 +47,10 @@ if (config.daemonize) {
 
 let logger = new  winston.Logger({
   level: config.logLevel,
-  colorize: true,
   transports: transports
 });
+
+logger.info('soundfics started');
 
 const soundBase = path.join(__dirname, 'sounds');
 let sounds = {};
@@ -207,25 +208,25 @@ let proxy = net.createServer(proxySocket => {
   });
 
   proxySocket.on('error', error => {
-    // console.log(error);
+    logger.debug('proxy socket error event with', error);
     ficsSocket.end();
     logout(fics);
   });
 
   ficsSocket.on('error', error => {
-    // console.log(error);
+    logger.debug('fics socket error event with', error);
     proxySocket.end();
     logout(fics);
   });
 
   proxySocket.on('close', error => {
-    // console.log('proxy connection closed', error);
+    logger.debug('proxy connection closed', error);
     ficsSocket.end();
     logout(fics);
   });
 
   ficsSocket.on('close', error => {
-    // console.log('FICS connection closed', error);
+    logger.debug('fics connection closed with', error);
     proxySocket.end();
     logout(fics);
   });
