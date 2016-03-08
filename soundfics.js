@@ -220,13 +220,21 @@ let proxy = net.createServer(proxySocket => {
   });
 
   proxySocket.on('close', error => {
-    logger.debug('proxy connection closed', error);
+    if (error) {
+      logger.error('error on proxy connection closing', error);
+    } else {
+      logger.debug('proxy connection closed');
+    }
     ficsSocket.end();
     logout(fics);
   });
 
   ficsSocket.on('close', error => {
-    logger.debug('fics connection closed with', error);
+    if (error) {
+      logger.error('error on fics connection closing', error);
+    } else {
+      logger.debug('fics connection closed');
+    }
     proxySocket.end();
     logout(fics);
   });
