@@ -95,6 +95,15 @@ function getAction(s) {
     };
   }
 
+  // check aborted game
+  matches = /{Game.+\((\w+)\svs.\s(\w+)\) Game aborted on move\s\d+}/.exec(s);
+  if (matches && matches.length == 3) {
+    return {
+      id: 'abort',
+      players: {white: matches[1], black: matches[2]}
+    };
+  }
+
   // check that is style12
   matches = /(<12>)\s((\S+\s){8})([B|W])\s(-*\d)\s(\d)\s(\d)\s(\d)\s(\d)\s(\d+)\s(\d+)\s(\w+)\s(\w+)\s(-*\d)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s([BKNPQRa-ho1-8\-\/]*)\s(\(.+\))\s([BKNPQRa-h1-8Ox+\-]*)/.exec(s);
 
@@ -170,6 +179,9 @@ function action(data, sounds) {
       }
     }
     fics.game = {white: false, black: false};
+  } else if (action.id === 'abort') {
+    playData.push(getRandomSound(sounds, 'abort'));
+    fics.game = {white: false, black: false};
   }
 
   playData.forEach(file => {
@@ -222,8 +234,7 @@ let proxy = net.createServer(proxySocket => {
   proxySocket.on('close', error => {
     if (error) {
       logger.error('error on proxy connection closing', error);
-    } else {
-      logger.debug('proxy connection closed');
+    } else {      logger.debug('proxy connection closed');
     }
     ficsSocket.end();
     logout(fics);
