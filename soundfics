@@ -26,7 +26,7 @@ case ${ACTION} in
         if [ -L ${0} ] ; then
             cd $(dirname $(readlink -en ${0}))
         fi
-        npm start > /dev/null
+        npm start
         ;;
     "stop")
         if [ -z ${PID} ]; then
