@@ -45,7 +45,7 @@ Soundfics has several confguration options
 |port|soundfics port number|5000|
 |daemonize|daemon mode|true|
 |loglevel|winston log level|error|
-|backlight|baclight base sound or not|true|
+|backlight|backlight base sound or not|true|
 
 You can change configuration options by npm.
 For example
