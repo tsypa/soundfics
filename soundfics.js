@@ -30,8 +30,10 @@ if (daemonize) {
 }
 
 let fics = {
+  state: false,
   login: false,
   game: {
+    state: false,
     white: false,
     black: false
   }
@@ -42,7 +44,7 @@ let transports = [];
 if (config.daemonize) {
   transports.push(new (winston.transports.File)({filename: 'soundfics.log'}));
 } else {
-  transports.push(new (winston.transports.Console)());
+  transports.push(new (winston.transports.Console)({colorize: true}));
 }
 
 let logger = new  winston.Logger({
@@ -91,7 +93,7 @@ function getAction(s) {
     return {
       id: 'end',
       players: {white: matches[1], black: matches[2]},
-      result: {white: matches[3], black: matches[3] === '*' ? '*' : matches[4]}
+      result: {white: matches[3], black: matches[3] === '*' ? '*' : matches[4], s: s}
     };
   }
 
@@ -138,8 +140,6 @@ function action(data, sounds) {
 
   if (action) {
     logger.debug(action);
-  } else {
-    logger.debug(s);
   }
 
   if (action.id === 'login') {
@@ -147,6 +147,7 @@ function action(data, sounds) {
     playData.push(getRandomSound(sounds, 'login'));
   } else if (action.id === 'start') {
     playData.push(getRandomSound(sounds, 'start'));
+    fics.game.state = 'progress';
     fics.game.white = action.white;
     fics.game.black = action.black;
   } else if (action.id === 'move') {
@@ -166,8 +167,8 @@ function action(data, sounds) {
       playData.push(getRandomSound(sounds, 'move'));
     }
   } else if (action.id === 'end') {
+    logger.debug('fics', fics);
     if (action.result.white === action.result.black) {
-      // draw
       playData.push(getRandomSound(sounds, 'draw'));
     } else {
       let myColor = action.players.white === fics.login ? 'white' : 'black';
@@ -178,7 +179,10 @@ function action(data, sounds) {
         playData.push(getRandomSound(sounds, 'lose'));
       }
     }
-    fics.game = {white: false, black: false};
+    fics.game = {state: false, white: false, black: false};
+    if (fics.state === 'logout') {
+      logout(fics);
+    }
   } else if (action.id === 'abort') {
     playData.push(getRandomSound(sounds, 'abort'));
     fics.game = {white: false, black: false};
@@ -191,8 +195,15 @@ function action(data, sounds) {
 }
 
 function logout(fics) {
-  fics.game = {white: false, black: false};
-  fics.login = false;
+  logger.debug('logout called');
+  if (!fics.game.state) {
+    fics.game.white = false;
+    fics.game.black = false;
+    fics.login = false;
+    fics.state = false;
+  } else {
+    fics.state = 'logout';
+  }
 }
 
 let proxy = net.createServer(proxySocket => {
