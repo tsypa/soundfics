@@ -5,7 +5,7 @@
     "soundfics": "./soundfics"
   },
   "preferGlobal": "true",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "FICS proxy which highlights the traffic by sound",
   "scripts": {
     "start": "node --harmony soundfics.js",
