@@ -4,7 +4,7 @@ FICS proxy which pumps up traffic by sound
 ## Motivation
 I like to play on FICS under Linux with xboard.<br>
 But I am not satisfied with native Xboard's acoustic behaviour.<br>
-So, soundfics designed to sounds a chess traffic from FICS to FICS client <br>
+So, soundfics is designed to sound a chess traffic between FICS and FICS client <br>
 Tested with **Xboard**, **Jin**, **eboard**
 
 ## Requirements
