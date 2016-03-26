@@ -1,5 +1,5 @@
 # soundfics
-FICS proxy which highlights the traffic by sound
+FICS proxy which pumps up traffic by sound
 
 ## Motivation
 I like to play on FICS under Linux with xboard.<br>
