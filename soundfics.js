@@ -107,7 +107,7 @@ function getAction(s) {
   }
 
   // check that is style12
-  matches = /(<12>)\s((\S+\s){8})([B|W])\s(-*\d)\s(\d)\s(\d)\s(\d)\s(\d)\s(\d+)\s(\d+)\s(\w+)\s(\w+)\s(-*\d)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s([BKNPQRa-ho1-8\-\/]*)\s(\(.+\))\s([BKNPQRa-h1-8Ox+\-]*)/.exec(s);
+  matches = /(<12>)\s((\S+\s){8})([B|W])\s(-*\d)\s(\d)\s(\d)\s(\d)\s(\d)\s(\d+)\s(\d+)\s(\w+)\s(\w+)\s(-*\d)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s(\d+)\s([BKNPQRa-ho1-8\-\/=]*)\s(\(.+\))\s([BKNPQRa-h1-8Ox+\-=]*)/.exec(s);
 
   if (matches && matches.length > 24) {
     return {
@@ -124,7 +124,6 @@ function getAction(s) {
       notation: {verbose: matches[22], pretty: matches[24]}
     };
   }
-
   return false;
 };
 
@@ -136,6 +135,9 @@ function getRandomSound(sounds, key) {
 function action(data, sounds) {
   let playData = [];
   let s = data.toString('ascii');
+
+  logger.silly('data', s);
+
   let action = getAction(s);
 
   if (action) {
