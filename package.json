@@ -6,7 +6,7 @@
   },
   "preferGlobal": "true",
   "version": "1.0.23",
-  "description": "FICS proxy which highlights the traffic by sound",
+  "description": "FICS proxy which pumps up traffic by sound",
   "scripts": {
     "start": "node --harmony soundfics.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,7 +22,7 @@
     "xboard",
     "chess"
   ],
-  "author": "Maxim Tsyplakov",
+  "author": "Maxim Tsyplakov <maxim.tsyplakov@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tsypa/soundfics/issues"

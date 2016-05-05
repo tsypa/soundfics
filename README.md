@@ -1,4 +1,7 @@
 # soundfics
+[![npm version][npm-image]][npm-url]
+[![Downloads][downloads-image]][downloads-url]
+
 FICS proxy which pumps up traffic by sound
 
 ## Motivation
@@ -66,3 +69,8 @@ Tells to soundfics to sound something like Fritz<br>
 
 ## License
 soundfics is released under the MIT license.
+
+[npm-image]: https://img.shields.io/npm/v/soundfics.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/soundfics
+[downloads-image]: http://img.shields.io/npm/dm/soundfics.svg?style=flat-square
+[downloads-url]: https://npmjs.org/package/soundfics
