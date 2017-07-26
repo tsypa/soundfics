@@ -26,7 +26,9 @@ if (daemonize === undefined) {
 }
 
 if (daemonize) {
-  require('daemon')();
+  require('daemon')({
+    cwd: process.cwd(),
+  });
 }
 
 let fics = {

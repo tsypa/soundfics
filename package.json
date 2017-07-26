@@ -8,7 +8,7 @@
   "version": "1.0.23",
   "description": "FICS proxy which pumps up traffic by sound",
   "scripts": {
-    "start": "node --harmony soundfics.js",
+    "start": "node soundfics.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,7 +30,7 @@
   "homepage": "https://github.com/tsypa/soundfics#readme",
   "dependencies": {
     "daemon": "^1.1.0",
-    "lodash": "^4.5.0",
-    "winston": "^2.1.1"
+    "lodash": "^4.17.4",
+    "winston": "^2.3.1"
   }
 }
