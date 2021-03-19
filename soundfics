@@ -5,7 +5,8 @@ usage() {
 }
 
 isRunning() {
-    ps -C node -o pid,command | awk '/soundfics.js/{print $1}'
+    ps aux|awk '/node \.\/soundfics.js/{ print $2}'
+    # ps -C node -o pid,command | awk '/soundfics.js/{print $1}'
 }
 
 if [ ${#} -ne 1 ] ; then
@@ -26,7 +27,7 @@ case ${ACTION} in
         if [ -L ${0} ] ; then
             cd $(dirname $(readlink -en ${0}))
         fi
-        npm start
+        yarn start
         ;;
     "stop")
         if [ -z ${PID} ]; then
