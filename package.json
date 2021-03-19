@@ -5,7 +5,7 @@
     "soundfics": "./soundfics"
   },
   "preferGlobal": "true",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "FICS proxy which pumps up traffic by sound",
   "scripts": {
     "start": "node soundfics.js",
